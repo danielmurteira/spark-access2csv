@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.ddom</groupId>
+    <artifactId>spark-access2csv</artifactId>
+    <version>1.0.0</version>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>access2csv</module>
+    </modules>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <java.version>1.8</java.version>
+        <scala.major.version>2.11</scala.major.version>
+        <scala.version>${scala.major.version}.12</scala.version>
+        <spark.version>2.4.7</spark.version>
+        <slf4j.version>1.7.26</slf4j.version>
+        <ucanaccess.version>5.0.1</ucanaccess.version>
+        <scalatest.version>3.1.1</scalatest.version>
+
+        <!-- ===================== Maven plugins versions ====================== -->
+        <maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>    <!-- Version: May 2019 -->
+        <maven.scala.plugin.version>4.3.0</maven.scala.plugin.version>  <!-- Version: July 2019 -->
+        <maven.scalatest.plugin.version>2.0.0</maven.scalatest.plugin.version>
+
+        <skipTests>false</skipTests> <!-- Flag used to skip unit tests. -->
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- Spark dependencies. -->
+            <dependency>
+                <groupId>org.apache.spark</groupId>
+                <artifactId>spark-core_${scala.major.version}</artifactId>
+                <version>${spark.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.spark</groupId>
+                <artifactId>spark-sql_${scala.major.version}</artifactId>
+                <version>${spark.version}</version>
+            </dependency>
+
+            <!-- SLF4 dependencies -->
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-log4j12</artifactId>
+                <version>${slf4j.version}</version>
+            </dependency>
+
+            <!-- UCanAccess: JDBC for Microsoft Access -->
+            <dependency>
+                <groupId>net.sf.ucanaccess</groupId>
+                <artifactId>ucanaccess</artifactId>
+                <version>${ucanaccess.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.scala-lang</groupId>
+                <artifactId>scala-library</artifactId>
+                <version>${scala.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.scalatest</groupId>
+                <artifactId>scalatest_${scala.major.version}</artifactId>
+                <version>${scalatest.version}</version>
+                <scope>test</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <!-- ======================= Maven Compile Phase ======================== -->
+                <!-- Maven compiler plugin. Used to compile Java source code. -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${maven.compiler.plugin.version}</version>
+                    <configuration>
+                        <source>${java.version}</source>
+                        <target>${java.version}</target>
+                        <testSource>${java.version}</testSource>
+                        <testTarget>${java.version}</testTarget>
+                    </configuration>
+                </plugin>
+
+                <!-- Scala maven compiler plugin. Used to compile Scala source code. -->
+                <plugin>
+                    <groupId>net.alchim31.maven</groupId>
+                    <artifactId>scala-maven-plugin</artifactId>
+                    <version>${maven.scala.plugin.version}</version>
+                    <executions>
+                        <execution>
+                            <id>scala-compile-first</id>
+                            <phase>process-resources</phase>
+                            <goals>
+                                <goal>add-source</goal>
+                                <goal>compile</goal>
+                            </goals>
+                        </execution>
+                        <execution>
+                            <id>scala-test-compile</id>
+                            <phase>process-test-resources</phase>
+                            <goals>
+                                <goal>testCompile</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.scalatest</groupId>
+                    <artifactId>scalatest-maven-plugin</artifactId>
+                    <version>${maven.scalatest.plugin.version}</version>
+                    <executions>
+                        <!-- Unit tests classes must follow the suffix Tests -->
+                        <execution>
+                            <id>scala-test-unit</id>
+                            <phase>test</phase>
+                            <goals>
+                                <goal>test</goal>
+                            </goals>
+                            <configuration>
+                                <reportsDirectory>${project.build.directory}/test-reports</reportsDirectory>
+                                <junitxml>.</junitxml>
+                                <filereports>ScalaTestSuite.txt</filereports>
+                                <suffixes>Tests</suffixes>
+                                <skipTests>${skipTests}</skipTests>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+</project>

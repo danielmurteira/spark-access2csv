@@ -1,0 +1,33 @@
+{
+  "spark": {
+    "spark.app.name": "AccdbToCsv",
+    "spark.master": "yarn",
+    "spark.submit.deployMode": "cluster",
+    "spark.executor.memory": "2g",
+    "spark.driver.memory": "1g",
+    "spark.executor.cores": "3",
+    "spark.cores.max": "3",
+    "spark.dynamicAllocation.enabled": "true"
+  },
+  "accdb": {
+    "inputPath": "example.accdb",
+    "inputTable": "exampletable",
+    "options": {
+      "query": "SELECT * FROM exampletable",
+      "customSchema": "id int, name string, address string"
+    }
+  },
+  "csv": {
+    "outputPath": "/path/to/example.csv",
+    "mode": "overwrite",
+    "options": {
+      "sep": ";",
+      "header": "true",
+      "encoding": "UTF-8"
+    },
+    "extra": {
+      "sepAscii": 1,
+      "singleFile": true
+    }
+  }
+}
