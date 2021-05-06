@@ -71,4 +71,6 @@ extra.sepAscii | yes | 44
 
 - http://ucanaccess.sourceforge.net/site.html
 
-Spark version: 2.4.7
+Spark version: 2.4.5
+
+*TODO: [add docker](https://github.com/big-data-europe/docker-spark/tree/master/template/java)*
