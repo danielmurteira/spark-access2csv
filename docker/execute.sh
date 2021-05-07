@@ -2,11 +2,6 @@
 
 cd /usr/src/app
 
-#APP_LOCATION="/usr/src/app/"
-#LIBS="${APP_LOCATION}jars/libs/"
-#INPUT="${APP_LOCATION}input/"
-#APP_PATH="${APP_LOCATION}access2csv/target/"
-
 cp docker/jars/libs/hsqldb-2.5.0.jar ${SPARK_APPLICATION_JAR_LOCATION}
 cp docker/jars/libs/jackcess-3.0.1.jar ${SPARK_APPLICATION_JAR_LOCATION}
 cp docker/jars/libs/ucanaccess-5.0.1.jar ${SPARK_APPLICATION_JAR_LOCATION}

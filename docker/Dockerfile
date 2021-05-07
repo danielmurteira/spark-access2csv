@@ -18,16 +18,4 @@ RUN cd /usr/src/app && mvn dependency:resolve
 RUN cd /usr/src/app && mvn verify
 RUN cd /usr/src/app && mvn clean package
 
-# Copy the POM-file first, for separate dependency resolving and downloading
-#ONBUILD COPY pom.xml /usr/src/app
-#ONBUILD RUN cd /usr/src/app \
-#      && mvn dependency:resolve
-#ONBUILD RUN cd /usr/src/app \
-#      && mvn verify
-
-# Copy the source code and build the application
-#ONBUILD COPY . /usr/src/app
-#ONBUILD RUN cd /usr/src/app \
-#      && mvn clean package
-
 CMD ["/bin/bash", "/execute.sh"]
