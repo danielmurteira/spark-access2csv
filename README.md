@@ -1,4 +1,10 @@
-***Usage with files and jars in HDFS (needs yarn):***
+###**Summary:**
+
+Spark module to convert MS Access files to CSV format.
+
+###**Usage:**
+
+***Files and jars in HDFS (needs yarn):***
 
 ```
 spark-submit --class com.ddom.access2csv.AccdbToCsv \
@@ -7,7 +13,7 @@ spark-submit --class com.ddom.access2csv.AccdbToCsv \
     "hdfs:///%LAPP_PATH%/access2csv-1.0.0.jar" "%JSON%"
 ```
 
-***Usage with files and jars in local FS:***
+***Files and jars in local FS:***
 
 ```
 spark-submit --class com.ddom.access2csv.AccdbToCsv \
@@ -67,10 +73,33 @@ extra.sepAscii | yes | 44
 - logs will print the data schema (column types received from MS Access)
 - the application works both with a json file or a json string for the input parameter
 
+###**Docker support:**
+
+You can also run the application if you have docker installed.
+- Download the repository:
+```
+git clone https://github.com/danielmurteira/spark-access2csv.git
+```
+- Place the MS Access file to be converted in docker/input
+- Edit params.json in docker/input with your file and table names
+- Create the docker image:
+```
+docker build -t dmurteira/spark-access2csv -f docker/Dockerfile .
+```
+- Run the container:
+```
+docker run --name spark-access2csv -v %cd%/docker/output:/results  -d dmurteira/spark-access2csv
+```
+- The csv file will appear in docker/output
+
+###**Other info:**
+
 ***Links:***
-
 - http://ucanaccess.sourceforge.net/site.html
+- https://github.com/big-data-europe/docker-spark
 
-Spark version: 2.4.5
-
-*TODO: [add docker](https://github.com/big-data-europe/docker-spark/tree/master/template/java)*
+***Versions:***
+- Spark 2.4.5
+- Scala 2.11.12
+- Java 1.8
+- UCanAccess 5.0.1
