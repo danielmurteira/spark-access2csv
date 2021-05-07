@@ -1,8 +1,8 @@
-###Summary:
+### Summary:
 
 Spark module to convert MS Access files to CSV format.
 
-###Usage:
+### Usage:
 
 ***Files and jars in HDFS (needs yarn):***
 
@@ -73,7 +73,7 @@ extra.sepAscii | yes | 44
 - logs will print the data schema (column types received from MS Access)
 - the application works both with a json file or a json string for the input parameter
 
-###Docker support:
+### Docker support:
 
 You can also run the application if you have docker installed.
 - Download the repository:
@@ -92,7 +92,7 @@ docker run --name spark-access2csv -v %cd%/docker/output:/results  -d dmurteira/
 ```
 - The csv file will appear in docker/output
 
-###Other info:
+### Other info:
 
 ***Links:***
 - http://ucanaccess.sourceforge.net/site.html
