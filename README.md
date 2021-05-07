@@ -75,7 +75,7 @@ extra.sepAscii | yes | 44
 
 ### Docker support:
 
-You can also run the application if you have docker installed.
+You can also run the application with docker, alternatively.
 - Download the repository:
 ```
 git clone https://github.com/danielmurteira/spark-access2csv.git
@@ -91,6 +91,8 @@ docker build -t dmurteira/spark-access2csv -f docker/Dockerfile .
 docker run --name spark-access2csv -v %cd%/docker/output:/results  -d dmurteira/spark-access2csv
 ```
 - The csv file will appear in docker/output
+
+You might need to adjust SPARK_DRIVER_MEMORY and SPARK_EXECUTOR_MEMORY in Dockerfile if the input file is bigger than usual.
 
 ### Other info:
 

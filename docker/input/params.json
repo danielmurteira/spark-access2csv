@@ -1,20 +1,12 @@
 {
-  "spark": {
-    "spark.app.name": "ConversionApp",
-    "spark.jars": "/ucanaccess-5.0.1.jar,/jackcess-3.0.1.jar,/hsqldb-2.5.0.jar"
-  },
   "accdb": {
     "inputPath": "/file.accdb",
-    "inputTable": "SampleTable",
-    "options": {  }
+    "inputTable": "SampleTable"
   },
   "csv": {
     "outputPath": "/results/output.csv",
-    "mode": "overwrite",
     "options": {
-      "sep": ",",
-      "header": "true",
-      "encoding": "UTF-8"
+      "header": "true"
     },
     "extra": {
       "singleFile": true
