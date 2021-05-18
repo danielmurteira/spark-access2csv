@@ -88,7 +88,7 @@ docker build -t dmurteira/spark-access2csv -f docker/Dockerfile .
 ```
 - Run the container:
 ```
-docker run --name spark-access2csv -v %cd%/docker/output:/results  -d dmurteira/spark-access2csv
+docker run --name spark-access2csv -v %cd%/docker/output:/results -d dmurteira/spark-access2csv
 ```
 - The csv file will appear in docker/output
 
